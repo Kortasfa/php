@@ -1,0 +1,12 @@
+{
+    "name": "korta/lw5",
+    "description": "2023 korta lw5",
+    "type": "project",
+    "license": "no",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src"
+        }
+    },
+    "require": {}
+}
