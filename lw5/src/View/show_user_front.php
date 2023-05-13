@@ -13,7 +13,7 @@
 <p>Дата рождения: <?= htmlentities($user->getBirthDate()) ?></p>
 <p>Email: <?= htmlentities($user->getEmail()) ?></p>
 <p>Телефон: <?= htmlentities($user->getPhone()) ?></p>
-<p>Аватар: <?= htmlentities($user->getAvatarPath()) ?></p>
+<img src="<?=htmlentities($user->getAvatarPath()) ?>" alt="avatar">
 </body>
 
 </html>

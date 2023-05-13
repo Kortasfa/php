@@ -36,6 +36,7 @@ class UserTable
         $statement = $this->connection->query($query);
         if ($row = $statement->fetch(\PDO::FETCH_ASSOC))
         {
+
             return $this->createUserFromRow($row);
         }
 
@@ -68,7 +69,7 @@ class UserTable
     private function createUserFromRow(array $row): User
     {
         return new User(
-            (int)$row['id'],
+            (int)$row['user_id'],
             $row['first_name'],
             $row['last_name'],
             $row['middle_name'],
@@ -76,8 +77,23 @@ class UserTable
             $row['birth_date'],
             $row['email'],
             $row['phone'],
-            $row['avatar_path']
+            ImageActions::getUploadUrlPath($row['avatar_path'])
         );
+    }
+
+    public function updateAvatarPath(string $avatarPath, int $userId): void
+    {
+        $query = <<<SQL
+        UPDATE user
+        SET avatar_path = :avatar_path
+        WHERE user_id = :user_id
+        SQL;
+
+        $statement = $this->connection->prepare($query);
+        $statement->execute([
+            ':avatar_path' => $avatarPath,
+            ':user_id' => $userId,
+        ]);
     }
 
 }
